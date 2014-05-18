@@ -2,6 +2,8 @@
 
 CropCircle is a modern, minimal, hackable image cropping widget with minimal dependences (just jQuery) that tries to provide a cropping interface that's manageable on small touch devices as well as desktops.
 
+[Live Demo](http://avocadocorp.github.io/CropCircle/cropcircletest.html)
+
 ## Using
 
 CropCircle is built to be loaded by your favorite AMD-compliant tool. If you don't want to pull one of those in, see cropcircletest.html for an example of hacking around that. Once the code is loaded, initialization is very simple:
@@ -55,7 +57,7 @@ CropCircle is built to be loaded by your favorite AMD-compliant tool. If you don
            Additionally, if a forceAspect ratio is provided and no initial 
            dimensions are set, the crop area will be set to the maximum size 
            possible that still maintains the requested aspect ratio and 
-           centered within any resulting excess space. *
+           centered within any resulting excess space. */
         noInitialBounds: false,
 
         /* Optional. Initial position of the cropping area in CSS-style pixel
