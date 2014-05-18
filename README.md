@@ -71,6 +71,44 @@ CropCircle is built to be loaded by your favorite AMD-compliant tool. If you don
 
 There is also a <code>remove()</code> method available on the created CropCircle object which will remove any elements or event handlers added to your page by CropCircle.
 
+You will also need some CSS. This is left as an exercise to the reader because everyone has different styles and maybe you're using LESS or SASS. Here is some example CSS to get you started:
+
+```css
+    /* The actual cropping frame overlay. The border is what you actually
+        see covering the cropped content.
+        border-width gets set to an appropriate (large) value in code. */
+    .crop-circle-crop-frame {
+        border: 40px solid rgba(0, 0, 0, 0.8);
+    }
+
+    /* What the handles should look like. */
+    .crop-circle-handle {
+        width: 10px;
+        height: 10px;
+        background-color: white;
+        box-shadow: 0 0 5px black;
+    }
+
+    /* On touch devices, the parent box gets the class crop-circle-touch added.
+       Here we're using this to have no handles on touch devices because
+       they're only useful if there's a mouse. */
+    .crop-circle-touch .crop-circle-handle {
+        display: none;
+    }
+
+    /* How to style the help blurb that shows on touch devices. Note the
+       z-index, it's necessary to put the help blurb above the crop frame. */
+    .crop-circle-help {
+        color: white;
+        text-shadow: 2px 2px 2px black;
+        font-size: 20px;
+        position: absolute;
+        z-index: 1000;
+        top: 10px;
+        left: 10px;
+    }
+```
+
 ## Requirements
 A modern flavor of jQuery. Probably something like 1.8.x. Built and tested with 1.11.1.
   
