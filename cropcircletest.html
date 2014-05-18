@@ -1,0 +1,117 @@
+<html>
+<head>
+    <script type="text/javascript">
+        var CropCircle;
+
+        function init() {
+            CropCircle($("#testBox"),  {
+                handles: 8,
+                forceAspect: 1,
+                showHelp: true,
+                onFrameChanged: function(frame) {
+                    console.log(frame);
+                    var preview = $('#preview-box');
+                    var testBox = $('#testBox');
+                    var bounds = {
+                        top: -(frame.top/frame.height*preview.height()),
+                        bottom: -(frame.bottom/frame.height*preview.height()),
+                        left: -(frame.left/frame.width*preview.width()),
+                        right: -(frame.right/frame.width*preview.width()),
+                    };
+
+                    bounds.width = Math.abs(bounds.left) + preview.width() + Math.abs(bounds.right);
+                    bounds.height = Math.abs(bounds.top) + preview.height() + Math.abs(bounds.bottom);
+                    bounds.right = undefined;
+                    bounds.bottom = undefined;
+
+                    $('#preview').css(bounds);
+                },
+                circle: true
+            });
+        }
+
+        //superhaxored requirejs stub
+        function define(deps, func) {
+            CropCircle = func($);
+        }
+    </script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="cropcircle.js"></script>
+    <style>
+        body {
+            text-align: center;
+            font-family: Helvetica, sans-serif;
+            margin: 20px;
+        }
+
+        #testBox {
+            border: 1px solid #666;
+            background: grey;
+            margin: auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #testBox img {
+            width: 100%;
+        }
+
+        .crop-circle-crop-frame {
+            border: 40px solid rgba(0, 0, 0, 0.8);
+        }
+
+        .crop-circle-handle {
+            width: 10px;
+            height: 10px;
+            background-color: white;
+            box-shadow: 0 0 5px black;
+        }
+
+        .crop-circle-touch .crop-circle-handle {
+            display: none;
+        }
+
+        .crop-circle-help {
+            color: white;
+            text-shadow: 2px 2px 2px black;
+            font-size: 20px;
+            position: absolute;
+            z-index: 1000;
+            top: 10px;
+            left: 10px;
+        }
+
+        #preview-box {
+            overflow: hidden;
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin-top: 20px;
+            margin-right: 20px;
+            float: left;
+        }
+
+        #preview {
+            position: relative;
+        }
+
+        #caption {
+            margin-top: 20px;
+            margin-left: 20px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body onload="init()">
+    <a href="https://github.com/AvocadoCorp/CropCircle"><img style="position: absolute; top: 0; right: 0; border: 0; z-index: 10000;" src="https://camo.githubusercontent.com/365986a132ccd6a44c23a9169022c0b5c890c387/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png"></a>
+    <div id="testBox">
+        <!-- image credit: https://www.flickr.com/photos/three_french_hens/ -->
+        <img src="crop-circle.jpg">
+    </div>
+    <div id="preview-box">
+        <img id="preview" src="crop-circle.jpg"/>
+    </div>
+    <div id="caption">
+        Try it on mobile too! Also, fork this repo and play with the settings. You can have nonsquare or unconstrained crop area aspect ratios, four or eight handles, and a configurable initial crop region. Also try resizing the window or changing orientation on a mobile device.
+</body>
+</html>
