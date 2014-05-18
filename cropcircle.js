@@ -158,20 +158,12 @@ define(['jquery'], function($) {
       elWidth = newWidth;
       elHeight = newHeight;
 
+      //noInitialBounds means that the initial frame position is invalid because
+      //the dimensions of the image weren't set on init. Instead, fix it here:
       if(!options.noInitialBounds) {
         moveFrame(null, newFrame);
       }
       else {
-        // no cropping frame specified? Fix it up:
-        if(!(options.top || options.left || options.bottom || options.right)) {
-
-        }
-      }
-
-
-      //noInitialBounds means that the initial frame position is invalid because
-      //the dimensions of the image weren't set on init. Instead, fix it here:
-      if(options.noInitialBounds) {
         if(options.forceAspect) {
           var imageAspect = boundaries.width / boundaries.height;
           var adjust;
@@ -198,9 +190,6 @@ define(['jquery'], function($) {
         else {
           moveFrame(null, boundaries);
         }
-      }
-      else {
-        moveFrame(null, newFrame);
       }
 
       var style = cropFrame[0].style;
